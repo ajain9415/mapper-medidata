@@ -49,9 +49,8 @@ There is a single resource available for the Services to generate a mCatalog Ite
       "dictionary": {
         "type": "<MedDRA, WHODrug>",
         "version": "<20>",
-        "locale": "<EN,JA,DE>",
-        "use_cache": true
-      }
+        "locale": "<EN,JA,DE>"
+     }
     },
     {
       "coding_request_id": 2,
@@ -59,8 +58,7 @@ There is a single resource available for the Services to generate a mCatalog Ite
       "dictionary": {
         "type": "<MedDRA, WHODrug>",
         "version": "<20>",
-        "locale": "<EN,JA,DE>",
-        "use_cache": false
+        "locale": "<EN,JA,DE>"   
       }
     }
   ]
@@ -71,17 +69,16 @@ There is a single resource available for the Services to generate a mCatalog Ite
 #### Body Attributes
 The following attributes are used when creating a CatalogItem into the persistent data store
 
-|Attributes                   |Mandatory|Description                                                        |
-|:----------------------------|:-------:|:------------------------------------------------------------------|
-|mapper_request_id            |   Yes   |Universally unique identifier of the Study the item is part of     |
-|num_of_suggestions           |   Yes   |Universally unique identifier of the Client Division               |
-|request_locale               |   Yes   |URI for the item on the persisted data store                       |
-|coding_request_id            |   Yes   |Name of the item on the persisted data store                       |
-|verbatim_term                |   Yes   |UTC Timestamp in ISO 8601 format of the time the item was uploaded |
-|dictionary:type              |   Yes   |UTC Timestamp in ISO 8601 format of the time the item was uploaded |
-|dictionary:version           |   Yes   |UTC Timestamp in ISO 8601 format of the time the item was uploaded |
-|dictionary:locale            |   No    |UTC Timestamp in ISO 8601 format of the time the item was uploaded |
-|dictionary:use_cache         |   No    |UTC Timestamp in ISO 8601 format of the time the item was uploaded |
+|Attributes                   |Mandatory|Description                                                            |
+|:----------------------------|:-------:|:----------------------------------------------------------------------|
+|mapper_request_id            |   Yes   |Unique UUID for each request                                           |
+|num_of_suggestions           |   Yes   |Maximum number of suggestions returned for each verbatim term          |
+|request_locale               |   Yes   |URI for the item on the persisted data store                           |
+|coding_request_id            |   Yes   |Coding Request Id (1,2,3,4 … n)                                        |
+|verbatim_term                |   Yes   |Verbatim term value.    |
+|dictionary:type              |   Yes   |Dictionary type to use for finding suggestions.  i.e. MedDRA, WHODrug  |
+|dictionary:version           |   Yes   |Dictionary version number to use for finding suggestions.              |
+|dictionary:locale            |   No    |Dictionary locale to use for finding suggestions.  i.e. EN, JA, DE     |
 
 
 *Response Body*
