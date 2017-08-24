@@ -34,7 +34,7 @@ The Authorization process authorizes all requests using Authorization records us
 There is a single resource available for the Services to generate a mCatalog Item - this uniquely identifies a file/blob inside mStore. We also allow the Services to query the data store to retrieve the metadata for files/blobs stored inside the mStore.
 
 #### Retrievel Route
-**POST: `/v1/mapper`**
+**POST: `/v1/autocoding_suggestions`**
 
 *Request Body*
 ```json
@@ -67,7 +67,7 @@ There is a single resource available for the Services to generate a mCatalog Ite
 
 
 #### Body Attributes
-The following attributes are used when creating a CatalogItem into the persistent data store
+The following attributes are used when requesting for coded terms for a verbatim 
 
 |Attributes                   |Mandatory|Description                                                            |
 |:----------------------------|:-------:|:----------------------------------------------------------------------|
@@ -75,7 +75,7 @@ The following attributes are used when creating a CatalogItem into the persisten
 |num_of_suggestions           |   Yes   |Maximum number of suggestions returned for each verbatim term          |
 |request_locale               |   Yes   |URI for the item on the persisted data store                           |
 |coding_request_id            |   Yes   |Coding Request Id (1,2,3,4 … n)                                        |
-|verbatim_term                |   Yes   |Verbatim term value.    |
+|verbatim_term                |   Yes   |Verbatim term value.                                                   |
 |dictionary:type              |   Yes   |Dictionary type to use for finding suggestions.  i.e. MedDRA, WHODrug  |
 |dictionary:version           |   Yes   |Dictionary version number to use for finding suggestions.              |
 |dictionary:locale            |   No    |Dictionary locale to use for finding suggestions.  i.e. EN, JA, DE     |
@@ -136,31 +136,21 @@ The following attributes are used when creating a CatalogItem into the persisten
 }
 ```
 
-`409` conflict - duplicate item
+#### Body Attributes
+The following attributes are returned in the response JSON 
 
-If request is made to create a new CatalogItem that has been previously created (a combination of study_environment_uuid and file name), then a 409 response is returned
-```json
-{
-  "message": "Item already exists"
-}
-```
+|Attributes                   |Mandatory|Description                                                            |
+|:----------------------------|:-------:|:----------------------------------------------------------------------|
+|mapper_response_id           |   Yes   |This uuid is same as corresponding mapper_request_id                   |
+|response_status              |   Yes   |Response Status (SUCCESS, FAIL, PARTIAL)                               |
+|coding_response_id           |   Yes   |Coding Response Id used to link back to originating coder_request_id   |
+|coding_status                |   Yes   |Allowed values (pass,fail)                                             |
+|coding_source                |   Yes   |Verbatim term value                                                    |
+|verbatim_term                |   Yes   |Verbatim term value                                                    |
+|suggested_term               |   Yes   |Suggested term value.                                                  |
+|rank                         |   Yes    |Rank of suggested term value.                                          |
 
-`422` missing parameters response
 
-The mCatalog Service will raise a 422 if any of mandatory attributes are missing or there are invalid attributes -
-1. `mandatory_attributes_missing` - a list of mandatory attributes missing in the request
-2. `invalid_attributes` - if the values of the attributes are not a valid format then an appropriate message is returned. This is true for optional attributes as well. While some timestamp attributes are optional - if provided, it is recommended that the Service use [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) UTC format.
-```json
-{
-  "mandatory_attributes_missing": [
-    "item_name",
-    "item_cataloged_at"
-  ],
-  "invalid_attributes": {
-    "item_cataloged_at": "Invalid date format"
-  }
-}
-```
 
 *Response Codes:*
 * 200: Successfully retrieved
