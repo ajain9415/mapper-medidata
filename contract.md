@@ -30,8 +30,8 @@ The Authorization process authorizes all requests using Authorization records us
 ***
 
 ## Application Programming Interface (API)
-### CatalogItem Resource
-There is a single resource available for the Services to generate a mCatalog Item - this uniquely identifies a file/blob inside mStore. We also allow the Services to query the data store to retrieve the metadata for files/blobs stored inside the mStore.
+### Mapper Service
+
 
 #### Retrievel Route
 **POST: `/v1/autocoding_suggestions`**
