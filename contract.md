@@ -73,12 +73,15 @@ The following attributes are used when creating a CatalogItem into the persisten
 
 |Attributes                   |Mandatory|Description                                                        |
 |:----------------------------|:-------:|:------------------------------------------------------------------|
-|request_id                   |   Yes   |Universally unique identifier of the Study the item is part of     |
-|verbatim                     |   Yes   |Universally unique identifier of the Client Division               |
-|dictionary_name              |   Yes   |URI for the item on the persisted data store                       |
-|dictionary_version           |   Yes   |Name of the item on the persisted data store                       |
-|result_size                  |   No    |UTC Timestamp in ISO 8601 format of the time the item was uploaded |
-                             
+|mapper_request_id            |   Yes   |Universally unique identifier of the Study the item is part of     |
+|num_of_suggestions           |   Yes   |Universally unique identifier of the Client Division               |
+|request_locale               |   Yes   |URI for the item on the persisted data store                       |
+|coding_request_id            |   Yes   |Name of the item on the persisted data store                       |
+|verbatim_term                |   Yes   |UTC Timestamp in ISO 8601 format of the time the item was uploaded |
+|dictionary:type              |   Yes   |UTC Timestamp in ISO 8601 format of the time the item was uploaded |
+|dictionary:version           |   Yes   |UTC Timestamp in ISO 8601 format of the time the item was uploaded |
+|dictionary:locale            |   No    |UTC Timestamp in ISO 8601 format of the time the item was uploaded |
+|dictionary:use_cache         |   No    |UTC Timestamp in ISO 8601 format of the time the item was uploaded |
 
 
 *Response Body*
